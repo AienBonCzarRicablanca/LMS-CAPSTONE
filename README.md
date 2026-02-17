@@ -83,3 +83,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 	- `APP_DEBUG=false`
 	- `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
 	- If using Aiven SSL: `MYSQL_ATTR_SSL_CA=/etc/secrets/<ca-file>.pem`
+
+### No Render Shell? (No upgrade)
+
+- Generate `APP_KEY` locally (PowerShell):
+	- `$bytes = New-Object byte[] 32; [System.Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes); "base64:$([Convert]::ToBase64String($bytes))"`
+- To run migrations without Shell, set on Render:
+	- `RUN_MIGRATIONS=true` (deploy once, then set back to `false`)
+- Optional initial seed:
+	- Set `LMS_ADMIN_EMAIL` and `LMS_ADMIN_PASSWORD`
+	- Set `RUN_SEED=true` (deploy once, then set back to `false`)

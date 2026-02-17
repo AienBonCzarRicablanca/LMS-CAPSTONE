@@ -11,4 +11,12 @@ php artisan view:cache >/dev/null 2>&1 || true
 # If you use storage:link in production, enable this (safe to re-run)
 php artisan storage:link >/dev/null 2>&1 || true
 
+if [ "${RUN_MIGRATIONS:-false}" = "true" ]; then
+	php artisan migrate --force
+fi
+
+if [ "${RUN_SEED:-false}" = "true" ]; then
+	php artisan db:seed --force
+fi
+
 exec php artisan serve --host 0.0.0.0 --port "${PORT:-8000}"
