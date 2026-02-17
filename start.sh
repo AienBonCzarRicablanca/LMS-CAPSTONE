@@ -2,7 +2,17 @@
 set -e
 
 # Ensure runtime-writable dirs exist (Render filesystem is ephemeral unless you add a disk)
-mkdir -p storage bootstrap/cache
+mkdir -p \
+	storage \
+	storage/app \
+	storage/app/public \
+	storage/framework \
+	storage/framework/cache \
+	storage/framework/cache/data \
+	storage/framework/sessions \
+	storage/framework/views \
+	storage/logs \
+	bootstrap/cache
 
 # Caches are optional; they may fail if APP_KEY is missing or routes use closures
 php artisan config:cache >/dev/null 2>&1 || true
